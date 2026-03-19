@@ -40,8 +40,7 @@ export async function loadConfig(): Promise<Config> {
     const response = await fetch(`${baseUrl}env.json`);
     const config = (await response.json()) as JsonConfig;
     if (!backendCanisterId && config.backend_canister_id === "undefined") {
-      console.error("CANISTER_ID_BACKEND is not set");
-      throw new Error("CANISTER_ID_BACKEND is not set");
+      console.warn("CANISTER_ID_BACKEND is not set. The app may have limited functionality.");
     }
 
     const fullConfig = {
@@ -65,12 +64,11 @@ export async function loadConfig(): Promise<Config> {
     return fullConfig;
   } catch {
     if (!backendCanisterId) {
-      console.error("CANISTER_ID_BACKEND is not set");
-      throw new Error("CANISTER_ID_BACKEND is not set");
+      console.warn("CANISTER_ID_BACKEND is not set. Using a fallback configuration.");
     }
     const fallbackConfig = {
       backend_host: undefined,
-      backend_canister_id: backendCanisterId,
+      backend_canister_id: backendCanisterId || "undefined",
       storage_gateway_url: DEFAULT_STORAGE_GATEWAY_URL,
       bucket_name: DEFAULT_BUCKET_NAME,
       project_id: DEFAULT_PROJECT_ID,

@@ -376,7 +376,7 @@ export default function App() {
           id="home"
           className="relative min-h-[92vh] flex items-center overflow-hidden"
           style={{
-            backgroundImage: `url('/assets/generated/biryani-hero.dim_1200x600.jpg')`,
+            backgroundImage: `url('assets/generated/biryani-hero.dim_1200x600.jpg')`,
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
