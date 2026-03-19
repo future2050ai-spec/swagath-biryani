@@ -1,3 +1,4 @@
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   CalendarCheck,
   CheckCircle2,
@@ -7,6 +8,7 @@ import {
   MapPin,
   Menu,
   Phone,
+  Quote,
   ShoppingBag,
   Star,
   Users,
@@ -91,10 +93,122 @@ function SectionHeading({
 const navLinks = [
   { label: "Home", href: "#home" },
   { label: "Specialties", href: "#specialties" },
+  { label: "Menu", href: "#menu" },
   { label: "Services", href: "#services" },
   { label: "Why Us", href: "#why-us" },
+  { label: "Reviews", href: "#reviews" },
   { label: "Contact", href: "#contact" },
 ];
+
+// ── Menu data ─────────────────────────────────────────────────────────────────
+const menuData = {
+  biryani: [
+    {
+      name: "Chicken Biryani",
+      telugu: "చికెన్ బిర్యానీ",
+      price: 180,
+      tag: "Bestseller",
+    },
+    { name: "Mutton Biryani", telugu: "మటన్ బిర్యానీ", price: 220, tag: "Premium" },
+    { name: "Veg Biryani", telugu: "వెజ్ బిర్యానీ", price: 140, tag: "" },
+    {
+      name: "Chicken Family Pack",
+      telugu: "చికెన్ ఫ్యామిలీ ప్యాక్",
+      price: 650,
+      tag: "Family",
+    },
+    {
+      name: "Mutton Family Pack",
+      telugu: "మటన్ ఫ్యామిలీ ప్యాక్",
+      price: 780,
+      tag: "Family",
+    },
+  ],
+  nonveg: [
+    {
+      name: "Chicken Manchurian",
+      telugu: "చికెన్ మంచూరియన్",
+      price: 200,
+      tag: "Spicy",
+    },
+    { name: "Chicken Wings", telugu: "చికెన్ వింగ్స్", price: 220, tag: "" },
+    { name: "Chilli Chicken", telugu: "చిల్లీ చికెన్", price: 200, tag: "Spicy" },
+    { name: "Chicken 65", telugu: "చికెన్ 65", price: 190, tag: "Classic" },
+    {
+      name: "Boneless Chicken Fry",
+      telugu: "బోన్‌లెస్ చికెన్ ఫ్రై",
+      price: 210,
+      tag: "",
+    },
+    { name: "Egg Curry", telugu: "గుడ్డు కర్రీ", price: 140, tag: "" },
+  ],
+  veg: [
+    { name: "Veg Manchurian", telugu: "వెజ్ మంచూరియన్", price: 160, tag: "" },
+    { name: "Chilli Paneer", telugu: "చిల్లీ పనీర్", price: 180, tag: "Popular" },
+    { name: "Paneer Fry", telugu: "పనీర్ ఫ్రై", price: 170, tag: "" },
+  ],
+};
+
+// ── Reviews data ──────────────────────────────────────────────────────────────
+const reviews = [
+  {
+    name: "రాజేశ్వర రెడ్డి",
+    nameEn: "Rajeshwara Reddy",
+    rating: 5,
+    text: "Best biryani in Hyderabad! The dum cooking makes all the difference. Mutton biryani is absolutely divine — juicy, aromatic, and perfect spice level.",
+    date: "March 2026",
+  },
+  {
+    name: "ప్రియంక శర్మ",
+    nameEn: "Priyanka Sharma",
+    rating: 5,
+    text: "Ordered a family pack for my daughter's birthday party. Everyone loved it! The quantity was generous and the taste was authentic Hyderabadi style.",
+    date: "February 2026",
+  },
+  {
+    name: "వెంకటేశ్ నాయుడు",
+    nameEn: "Venkatesh Naidu",
+    rating: 5,
+    text: "Chicken 65 and biryani combo is unbeatable. The starters are crispy and perfectly spiced. Very affordable pricing for such quality food!",
+    date: "March 2026",
+  },
+  {
+    name: "లక్ష్మి దేవి",
+    nameEn: "Lakshmi Devi",
+    rating: 4,
+    text: "The Chilli Paneer starter was amazing — fresh and flavorful. Veg biryani is excellent too. Great option for vegetarians who want authentic taste.",
+    date: "January 2026",
+  },
+  {
+    name: "సురేష్ కుమార్",
+    nameEn: "Suresh Kumar",
+    rating: 5,
+    text: "We catered our office lunch from Swagath. 50+ people and everyone was satisfied! The service was prompt and food was piping hot on arrival.",
+    date: "February 2026",
+  },
+  {
+    name: "అనీల కృష్ణ",
+    nameEn: "Anil Krishna",
+    rating: 5,
+    text: "The Chicken Manchurian here is the best I've had outside my mother's kitchen. Swagath Biryani is now our family's weekly ritual — every Sunday!",
+    date: "March 2026",
+  },
+];
+
+function StarRow({ count }: { count: number }) {
+  return (
+    <div className="flex gap-0.5">
+      {Array.from({ length: 5 }, (_, i) => i).map((starIdx) => (
+        <Star
+          key={starIdx}
+          className={`w-4 h-4 ${
+            starIdx < count ? "text-gold fill-gold" : "text-white/20"
+          }`}
+        />
+      ))}
+    </div>
+  );
+}
 
 export default function App() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -172,7 +286,7 @@ export default function App() {
           </button>
 
           {/* Desktop nav */}
-          <nav className="hidden md:flex items-center gap-6">
+          <nav className="hidden md:flex items-center gap-5">
             {navLinks.map((link) => (
               <button
                 type="button"
@@ -329,7 +443,7 @@ export default function App() {
                 <button
                   type="button"
                   data-ocid="hero.menu.secondary_button"
-                  onClick={() => scrollTo("#specialties")}
+                  onClick={() => scrollTo("#menu")}
                   className="px-8 py-3.5 rounded-full font-semibold text-sm tracking-wide border border-white/40 text-white/90 hover:border-gold/60 hover:text-gold transition-all duration-200"
                 >
                   View Menu
@@ -488,31 +602,167 @@ export default function App() {
           </div>
         </section>
 
-        {/* ── Services ───────────────────────────────────────────────────── */}
+        {/* ── Menu ───────────────────────────────────────────────────────── */}
         <section
-          id="services"
+          id="menu"
           className="py-20 px-4"
           style={{
             background:
               "linear-gradient(135deg, oklch(0.28 0.10 20) 0%, oklch(0.22 0.09 20) 100%)",
           }}
         >
-          <div className="max-w-6xl mx-auto">
+          <div className="max-w-4xl mx-auto">
             <FadeIn>
               <div className="text-center mb-12">
                 <h2 className="font-serif text-3xl md:text-4xl font-bold text-white tracking-wide uppercase">
-                  Our Services
+                  Our Menu
                 </h2>
+                <p
+                  className="text-gold text-lg mt-1 italic"
+                  style={{ fontFamily: "sans-serif" }}
+                >
+                  మెనూ
+                </p>
                 <div className="flex items-center justify-center gap-3 my-4">
                   <div className="h-px w-16 bg-gold" />
                   <UtensilsCrossed className="w-4 h-4 text-gold" />
                   <div className="h-px w-16 bg-gold" />
                 </div>
                 <p className="text-white/60 max-w-xl mx-auto text-sm md:text-base">
-                  We serve you in every way — dine in, carry out, or let us
-                  cater your celebrations.
+                  రుచికరమైన వంటకాలు — Delicious dishes crafted with love and
+                  authenticity.
                 </p>
               </div>
+            </FadeIn>
+
+            <FadeIn delay={0.2}>
+              <Tabs defaultValue="biryani" data-ocid="menu.tab">
+                <TabsList
+                  className="w-full mb-8 rounded-full p-1 h-auto"
+                  style={{ background: "rgba(255,255,255,0.08)" }}
+                >
+                  <TabsTrigger
+                    value="biryani"
+                    data-ocid="menu.biryani.tab"
+                    className="flex-1 rounded-full text-sm font-semibold tracking-wide py-2.5 data-[state=active]:text-maroon transition-all"
+                    style={
+                      {
+                        // active state handled via data-[state=active] in tailwind
+                      }
+                    }
+                  >
+                    🍚 Biryani
+                  </TabsTrigger>
+                  <TabsTrigger
+                    value="nonveg"
+                    data-ocid="menu.nonveg.tab"
+                    className="flex-1 rounded-full text-sm font-semibold tracking-wide py-2.5 data-[state=active]:text-maroon transition-all"
+                  >
+                    🍗 Non-Veg Starters
+                  </TabsTrigger>
+                  <TabsTrigger
+                    value="veg"
+                    data-ocid="menu.veg.tab"
+                    className="flex-1 rounded-full text-sm font-semibold tracking-wide py-2.5 data-[state=active]:text-maroon transition-all"
+                  >
+                    🥦 Veg Starters
+                  </TabsTrigger>
+                </TabsList>
+
+                {(
+                  Object.entries(menuData) as [
+                    keyof typeof menuData,
+                    typeof menuData.biryani,
+                  ][]
+                ).map(([category, items]) => (
+                  <TabsContent key={category} value={category}>
+                    <motion.div
+                      initial={{ opacity: 0, y: 12 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.35 }}
+                      className="grid sm:grid-cols-2 gap-3"
+                    >
+                      {items.map((item, i) => (
+                        <div
+                          key={item.name}
+                          data-ocid={`menu.item.${i + 1}`}
+                          className="flex items-center justify-between px-5 py-4 rounded-xl border border-white/10 hover:border-gold/30 transition-all duration-200 group"
+                          style={{ background: "rgba(255,255,255,0.05)" }}
+                        >
+                          <div className="flex-1 min-w-0 pr-3">
+                            <div className="font-semibold text-white text-sm group-hover:text-gold transition-colors">
+                              {item.name}
+                            </div>
+                            <div
+                              className="text-gold/60 text-xs mt-0.5"
+                              style={{ fontFamily: "sans-serif" }}
+                            >
+                              {item.telugu}
+                            </div>
+                          </div>
+                          <div className="flex items-center gap-2 shrink-0">
+                            {item.tag && (
+                              <span
+                                className="text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wide"
+                                style={{
+                                  background: "rgba(201,163,106,0.18)",
+                                  color: "oklch(0.78 0.09 70)",
+                                }}
+                              >
+                                {item.tag}
+                              </span>
+                            )}
+                            <span
+                              className="font-bold text-base"
+                              style={{ color: "oklch(0.78 0.09 70)" }}
+                            >
+                              ₹{item.price}
+                            </span>
+                          </div>
+                        </div>
+                      ))}
+                    </motion.div>
+                  </TabsContent>
+                ))}
+              </Tabs>
+            </FadeIn>
+
+            <FadeIn delay={0.4}>
+              <div className="mt-8 text-center">
+                <p className="text-white/50 text-xs">
+                  * Prices may vary slightly. Call us for bulk order pricing.
+                </p>
+                <button
+                  type="button"
+                  data-ocid="menu.order_now.primary_button"
+                  onClick={() => scrollTo("#contact")}
+                  className="mt-5 inline-flex items-center gap-2 px-7 py-3 rounded-full font-semibold text-sm transition-all duration-200 hover:scale-105"
+                  style={{
+                    background:
+                      "linear-gradient(135deg, oklch(0.71 0.10 68), oklch(0.78 0.09 70))",
+                    color: "oklch(0.22 0.09 20)",
+                  }}
+                >
+                  <Phone className="w-4 h-4" />
+                  Order via Phone
+                </button>
+              </div>
+            </FadeIn>
+          </div>
+        </section>
+
+        {/* ── Services ───────────────────────────────────────────────────── */}
+        <section
+          id="services"
+          className="py-20 px-4"
+          style={{ background: "oklch(0.93 0.03 75)" }}
+        >
+          <div className="max-w-6xl mx-auto">
+            <FadeIn>
+              <SectionHeading
+                title="Our Services"
+                subtitle="We serve you in every way — dine in, carry out, or let us cater your celebrations."
+              />
             </FadeIn>
 
             <div className="grid md:grid-cols-3 gap-6">
@@ -556,13 +806,13 @@ export default function App() {
               ].map((service, i) => (
                 <FadeIn key={service.id} delay={i * 0.15}>
                   <div
-                    className="rounded-2xl p-7 h-full border border-white/10 hover:border-gold/30 transition-all duration-300 group"
-                    style={{ background: "rgba(255,255,255,0.05)" }}
+                    className="rounded-2xl p-7 h-full border border-maroon/10 hover:border-gold/30 transition-all duration-300 group shadow-sm"
+                    style={{ background: "oklch(0.97 0.02 72)" }}
                     data-ocid={service.id}
                   >
                     <div className="flex items-center gap-3 mb-4">
                       {service.icon}
-                      <h3 className="font-serif text-lg font-bold text-white tracking-wide">
+                      <h3 className="font-serif text-lg font-bold text-maroon tracking-wide">
                         {service.title}
                       </h3>
                     </div>
@@ -570,7 +820,7 @@ export default function App() {
                       {service.items.map((item) => (
                         <li
                           key={item}
-                          className="text-white/70 text-sm flex items-start gap-2"
+                          className="text-foreground/70 text-sm flex items-start gap-2"
                         >
                           <span className="mt-0.5 shrink-0 text-gold">›</span>
                           <span>{item}</span>
@@ -646,31 +896,131 @@ export default function App() {
           </div>
         </section>
 
-        {/* ── Contact ────────────────────────────────────────────────────── */}
+        {/* ── Reviews ────────────────────────────────────────────────────── */}
         <section
-          id="contact"
-          className="py-24 px-4"
+          id="reviews"
+          className="py-20 px-4"
           style={{
             background:
-              "linear-gradient(135deg, oklch(0.22 0.09 20) 0%, oklch(0.34 0.11 20) 50%, oklch(0.22 0.09 20) 100%)",
+              "linear-gradient(135deg, oklch(0.22 0.09 20) 0%, oklch(0.28 0.10 20) 60%, oklch(0.22 0.09 20) 100%)",
           }}
         >
-          <div className="max-w-3xl mx-auto text-center">
+          <div className="max-w-6xl mx-auto">
             <FadeIn>
-              <div className="mb-8">
-                <h2 className="font-serif text-3xl md:text-5xl font-bold text-white tracking-wide uppercase">
-                  Contact & Orders
+              <div className="text-center mb-12">
+                <h2 className="font-serif text-3xl md:text-4xl font-bold text-white tracking-wide uppercase">
+                  Customer Reviews
                 </h2>
+                <p
+                  className="text-gold text-base mt-1 italic"
+                  style={{ fontFamily: "sans-serif" }}
+                >
+                  మా కస్టమర్ల అభిప్రాయాలు
+                </p>
                 <div className="flex items-center justify-center gap-3 my-4">
                   <div className="h-px w-16 bg-gold" />
                   <Star className="w-4 h-4 text-gold fill-gold" />
                   <div className="h-px w-16 bg-gold" />
                 </div>
-                <p className="text-white/70 text-base">
+                <p className="text-white/60 max-w-xl mx-auto text-sm">
+                  Hear what our happy customers say about their experience at
+                  Swagath Biryani.
+                </p>
+              </div>
+            </FadeIn>
+
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {reviews.map((review, i) => (
+                <FadeIn key={review.nameEn} delay={i * 0.1}>
+                  <div
+                    data-ocid={`reviews.item.${i + 1}`}
+                    className="rounded-2xl p-6 h-full border border-white/10 hover:border-gold/30 transition-all duration-300 flex flex-col gap-4"
+                    style={{ background: "rgba(255,255,255,0.05)" }}
+                  >
+                    {/* Quote icon */}
+                    <Quote className="w-6 h-6 text-gold/40 shrink-0" />
+
+                    {/* Review text */}
+                    <p className="text-white/75 text-sm leading-relaxed flex-1 italic">
+                      &ldquo;{review.text}&rdquo;
+                    </p>
+
+                    {/* Footer */}
+                    <div className="flex items-center justify-between pt-3 border-t border-white/10">
+                      <div>
+                        <div
+                          className="font-bold text-white text-sm"
+                          style={{ fontFamily: "sans-serif" }}
+                        >
+                          {review.name}
+                        </div>
+                        <div className="text-white/40 text-xs mt-0.5">
+                          {review.nameEn} · {review.date}
+                        </div>
+                      </div>
+                      <StarRow count={review.rating} />
+                    </div>
+                  </div>
+                </FadeIn>
+              ))}
+            </div>
+
+            {/* Aggregate rating strip */}
+            <FadeIn delay={0.5}>
+              <div
+                className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-8 py-6 px-8 rounded-2xl border border-white/10"
+                style={{ background: "rgba(255,255,255,0.04)" }}
+              >
+                <div className="text-center">
+                  <div className="font-serif text-4xl font-bold text-gold">
+                    4.9
+                  </div>
+                  <div className="flex justify-center mt-1">
+                    <StarRow count={5} />
+                  </div>
+                  <div className="text-white/50 text-xs mt-1">
+                    Average Rating
+                  </div>
+                </div>
+                <div className="hidden sm:block h-12 w-px bg-white/10" />
+                <div className="text-center">
+                  <div className="font-serif text-4xl font-bold text-gold">
+                    500+
+                  </div>
+                  <div className="text-white/50 text-xs mt-1">
+                    Happy Customers
+                  </div>
+                </div>
+                <div className="hidden sm:block h-12 w-px bg-white/10" />
+                <div className="text-center">
+                  <div className="font-serif text-4xl font-bold text-gold">
+                    100%
+                  </div>
+                  <div className="text-white/50 text-xs mt-1">Recommend Us</div>
+                </div>
+              </div>
+            </FadeIn>
+          </div>
+        </section>
+
+        {/* ── Contact ────────────────────────────────────────────────────── */}
+        <section
+          id="contact"
+          className="py-24 px-4"
+          style={{ background: "oklch(0.93 0.03 75)" }}
+        >
+          <div className="max-w-3xl mx-auto text-center">
+            <FadeIn>
+              <div className="mb-8">
+                <h2 className="font-serif text-3xl md:text-5xl font-bold text-maroon tracking-wide uppercase">
+                  Contact & Orders
+                </h2>
+                <GoldDivider />
+                <p className="text-foreground/70 text-base">
                   Craving something delicious? Call now!
                 </p>
                 <p
-                  className="mt-1 text-gold/70 text-sm italic"
+                  className="mt-1 text-gold text-sm italic"
                   style={{ fontFamily: "sans-serif" }}
                 >
                   రుచికరమైన బిర్యానీ కోసం ఇప్పుడే కాల్ చేయండి!
@@ -680,11 +1030,11 @@ export default function App() {
               <a
                 href="tel:+919177865323"
                 data-ocid="contact.phone.button"
-                className="inline-flex items-center gap-3 px-8 py-5 rounded-full text-xl md:text-2xl font-bold transition-all duration-300 hover:scale-105 shadow-gold"
+                className="inline-flex items-center gap-3 px-8 py-5 rounded-full text-xl md:text-2xl font-bold transition-all duration-300 hover:scale-105 shadow-lg"
                 style={{
                   background:
-                    "linear-gradient(135deg, oklch(0.71 0.10 68), oklch(0.78 0.09 70))",
-                  color: "oklch(0.22 0.09 20)",
+                    "linear-gradient(135deg, oklch(0.28 0.10 20), oklch(0.34 0.11 20))",
+                  color: "oklch(0.78 0.09 70)",
                 }}
               >
                 <Phone className="w-6 h-6" />
@@ -705,8 +1055,8 @@ export default function App() {
                 ].map((tag) => (
                   <div
                     key={tag.label}
-                    className="flex items-center gap-2 px-5 py-2.5 rounded-full border border-white/20 text-white/80 text-sm font-medium"
-                    style={{ background: "rgba(255,255,255,0.07)" }}
+                    className="flex items-center gap-2 px-5 py-2.5 rounded-full border border-maroon/20 text-foreground/70 text-sm font-medium"
+                    style={{ background: "oklch(0.97 0.02 72)" }}
                   >
                     <span className="text-gold">{tag.icon}</span>
                     {tag.label} Available
@@ -715,15 +1065,18 @@ export default function App() {
               </div>
 
               <p
-                className="mt-6 text-gold/60 text-sm italic"
+                className="mt-6 text-maroon/60 text-sm italic"
                 style={{ fontFamily: "sans-serif" }}
               >
                 అతిథి దేవో భవ — Our guest is our God
               </p>
 
-              <div className="mt-6 flex flex-col sm:flex-row justify-center gap-6 text-white/50 text-sm">
+              <div className="mt-6 flex flex-col sm:flex-row justify-center gap-6 text-foreground/50 text-sm">
                 <span className="flex items-center justify-center gap-2">
-                  <MapPin className="w-4 h-4 text-gold" /> Hyderabad, Telangana
+                  <MapPin className="w-4 h-4 text-gold" /> Guduru, Telangana
+                </span>
+                <span className="flex items-center justify-center gap-2">
+                  <MapPin className="w-4 h-4 text-gold" /> Duggondi, Telangana
                 </span>
                 <span className="flex items-center justify-center gap-2">
                   <Clock className="w-4 h-4 text-gold" /> Open Daily — Lunch &
