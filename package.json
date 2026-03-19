@@ -7,6 +7,7 @@
     "npm": "please use pnpm"
   },
   "scripts": {
+    "dev": "pnpm -r --if-present run dev",
     "build": "pnpm -r --if-present run build",
     "typecheck": "pnpm -r --if-present run typecheck",
     "check": "pnpm -r --if-present run check",
@@ -14,5 +15,8 @@
   },
   "devDependencies": {
     "sharp": "^0.34.4"
+  },
+  "dependencies": {
+    "vite": "^8.0.1"
   }
 }

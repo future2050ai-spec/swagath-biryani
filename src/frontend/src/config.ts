@@ -34,7 +34,7 @@ export async function loadConfig(): Promise<Config> {
     return configCache;
   }
   const backendCanisterId = process.env.CANISTER_ID_BACKEND;
-  const envBaseUrl = process.env.BASE_URL || "/";
+  const envBaseUrl = process.env.BASE_URL || "./";
   const baseUrl = envBaseUrl.endsWith("/") ? envBaseUrl : `${envBaseUrl}/`;
   try {
     const response = await fetch(`${baseUrl}env.json`);

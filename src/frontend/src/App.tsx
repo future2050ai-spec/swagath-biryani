@@ -15,6 +15,7 @@ import {
   UtensilsCrossed,
   X,
 } from "lucide-react";
+import { FaWhatsapp } from "react-icons/fa";
 import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 
@@ -1107,6 +1108,25 @@ export default function App() {
           </a>
         </p>
       </footer>
+
+      {/* ── WhatsApp Bubble ─────────────────────────────────────────────── */}
+      <a
+        href="https://wa.me/919177865323"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="fixed bottom-6 right-6 z-[60] flex items-center justify-center w-14 h-14 rounded-full shadow-lg transition-all duration-300 hover:scale-110 active:scale-95 group"
+        style={{
+          background: "oklch(0.67 0.23 150)", // Green WhatsApp color
+          filter: "drop-shadow(0 0 8px rgba(37, 211, 102, 0.3))",
+        }}
+      >
+        <FaWhatsapp className="w-8 h-8 text-white" />
+        
+        {/* Tooltip-like label */}
+        <span className="absolute right-full mr-3 px-3 py-1.5 rounded-lg bg-white text-maroon text-sm font-semibold whitespace-nowrap opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-200 pointer-events-none shadow-md">
+          Chat with us!
+        </span>
+      </a>
     </div>
   );
 }

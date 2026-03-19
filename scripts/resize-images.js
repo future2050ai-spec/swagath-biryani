@@ -3,7 +3,9 @@ import { promises as fs } from "fs";
 import path from "path";
 
 const DIMENSION_PATTERN = /^(.+?)\.dim_(\d+)x(\d+)(\.[^.]+)$/;
-const ASSETS_DIR = "src/frontend/dist/assets/generated";
+const ASSETS_DIR = (await fs.access("src/frontend/dist/assets/generated").then(() => true).catch(() => false))
+  ? "src/frontend/dist/assets/generated"
+  : "dist/assets/generated";
 
 async function fileExists(filePath) {
   try {
